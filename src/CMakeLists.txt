@@ -1,0 +1,4 @@
+add_subdirectory(main)
+add_subdirectory(libStack)
+add_subdirectory(libPlayer)
+add_subdirectory(libGameMaster)
