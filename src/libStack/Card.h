@@ -8,7 +8,9 @@ enum Attributes{
     HEIGHT,
     INTELLIGENCE,
     STRENGTH,
-    JEDIPOWER
+    JEDIPOWER,
+    ALWASYLAST
+
 };
 
 class BaseCard{
