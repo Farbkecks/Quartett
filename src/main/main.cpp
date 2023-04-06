@@ -10,5 +10,8 @@ int main() {
     Player player(8);
     Player computer(8);
 
+    Card x;
+    cout << x << endl;
+
     return 0;
 }

@@ -2,6 +2,7 @@
 #include <ostream>
 #include <string>
 #include <vector>
+#include <map>
 
 enum Attributes{
     HEIGHT,
@@ -10,31 +11,40 @@ enum Attributes{
     JEDIPOWER
 };
 
-
-class Card {
+class BaseCard{
+protected:
+    BaseCard();
 public:
-    Card(std::string name, std::string belonging, double height, int intelligence, int strength, int jediPower)
-    : m_name(name), m_belonging(belonging), m_height(height), m_intelligence(intelligence), m_strength(strength), m_jediPower(jediPower)
-    {};
-    Card();
+    template<Attributes T>
+    void setAttribute(double input){
+        attributes[T] = input;
+    }
 
-    std::string getName() const {return m_name;}
-    std::string getBelonging() const {return  m_belonging;}
-    double getHeight() const {return m_height;}
-    double getIntelligence() const {return m_intelligence;}
-    double getStrength() const { return m_strength;}
-    double getJediPower() const { return m_jediPower;}
-    double getAttributes(Attributes type) const;
+    template<Attributes T>
+    double getAttribute() const{
+        if(attributes.count(T) == 0 ) return 0.0;
+        return attributes.at(T);
+    }
 
+    template<Attributes T>
+    bool compare(BaseCard other) const{
+        return getAttribute<T>() > other.getAttribute<T>();
+    }
+
+    std::string getName()const{ return m_name;}
+    std::string getBelonging()const{ return m_belonging;}
 
 private:
-    double m_height;
-    double m_intelligence;
-    double m_strength;
-    double m_jediPower;
+    std::map<Attributes, double> attributes;
     std::string m_name;
     std::string m_belonging;
     static const std::vector<std::string> NAMES;
+};
+
+
+class Card : public BaseCard{
+public:
+    Card();
 };
 
 std::ostream &operator<<(std::ostream &strm, const Card &a);
