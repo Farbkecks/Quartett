@@ -1,10 +1,11 @@
 #include "Player.h"
 
-bool Player::playCardStatic(Player &user, Player &computer) {
-//    auto randromAttribute = static_cast<Attributes>(rand() % ALWASYLAST);
+bool Player::compareCard(Player &other) {
+    auto randromAttribute = static_cast<CardAttributes::Attributes>(rand() % CardAttributes::ALWASYLAST);
 
+    return playCard().compare(other.playCard(), randromAttribute);
+}
 
-    Attributes h = HEIGHT;
-    return user.playCard().compare<h>(computer.playCard());
-    return user.playCard().compare<HEIGHT>(computer.playCard());
+bool Player::compareCard(Player &other, CardAttributes::Attributes type) {
+    return playCard().compare(other.playCard(), type);
 }

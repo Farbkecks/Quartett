@@ -4,40 +4,34 @@
 #include <vector>
 #include <map>
 
-enum Attributes{
-    HEIGHT,
-    INTELLIGENCE,
-    STRENGTH,
-    JEDIPOWER,
-    ALWASYLAST
+namespace CardAttributes{
+    enum Attributes{
+        HEIGHT,
+        INTELLIGENCE,
+        STRENGTH,
+        JEDIPOWER,
+        ALWASYLAST
+    };
 
-};
+}
+std::ostream &operator<<(std::ostream &strm, const CardAttributes::Attributes &a);
+
 
 class BaseCard{
 protected:
     BaseCard();
 public:
-    template<Attributes T>
-    void setAttribute(double input){
-        attributes[T] = input;
-    }
+    void setAttribute(double input, CardAttributes::Attributes type);
 
-    template<Attributes T>
-    double getAttribute() const{
-        if(attributes.count(T) == 0 ) return 0.0;
-        return attributes.at(T);
-    }
+    double getAttribute(CardAttributes::Attributes type) const;
 
-    template<Attributes T>
-    bool compare(BaseCard other) const{
-        return getAttribute<T>() > other.getAttribute<T>();
-    }
+    bool compare(BaseCard other, CardAttributes::Attributes type) const;
 
     std::string getName()const{ return m_name;}
     std::string getBelonging()const{ return m_belonging;}
 
 private:
-    std::map<Attributes, double> attributes;
+    std::map<CardAttributes::Attributes, double> attributes;
     std::string m_name;
     std::string m_belonging;
     static const std::vector<std::string> NAMES;

@@ -8,7 +8,10 @@ public:
     void addPoint(){m_points++;}
     int getPoints() const{return m_points;}
 
-    bool static playCardStatic(Player & user, Player & computer);
+    bool compareCard(Player & other);
+    bool compareCard(Player & other, CardAttributes::Attributes type);
+
+
 private:
     int m_points;
 };
